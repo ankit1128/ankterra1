@@ -2,25 +2,25 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.27"
+      version = "3.60.0"
     }
   }
-
-  required_version = ">= 0.14.9"
 }
 
 provider "aws" {
-  profile = "default"
+  profile = "152992350355_AWSAdministratorAccess"
   region  = "us-west-2"
 }
+module "s3_bucket" {
+  source = "terraform-aws-modules/s3-bucket/aws"
 
-resource "aws_instance" "app_server" {
-  ami           = "ami-830c94e3"
-  instance_type = "t2.micro"
+  bucket = "my-s3-bucket789424"
+  acl    = "private"
 
-  tags = {
-    Name = "ExampleAppServerInstance"
+  versioning = {
+    enabled = true
   }
+
 }
 
 
